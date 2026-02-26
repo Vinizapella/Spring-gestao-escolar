@@ -18,7 +18,7 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
 
-    @PutMapping
+    @PostMapping
     public AlunoResponseDto criarAluno(
             @RequestBody AlunoRequestDto alunoRequestDto
     ){

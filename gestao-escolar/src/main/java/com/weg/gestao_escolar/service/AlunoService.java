@@ -26,6 +26,20 @@ public class AlunoService {
     }
 
     public AlunoResponseDto salvarAluno(AlunoRequestDto alunoRequestDto){
+
+        try {
+            if (alunoRepository.existeEmail(alunoRequestDto.email())){
+                throw new RuntimeException("Email já cadastrado"+ alunoRequestDto.email());
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+
+
+        if (alunoRequestDto.nome() == null || alunoRequestDto.nome().trim().isEmpty()) {
+            throw new RuntimeException("Erro: O nome do aluno não pode ser vazio.");
+        }
+
         try {
             Aluno aluno= alunoMapper.toEntity(alunoRequestDto);
             Aluno alunoSalvo = alunoRepository.criarAluno(aluno);

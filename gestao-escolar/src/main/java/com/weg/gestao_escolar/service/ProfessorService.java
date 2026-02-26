@@ -8,6 +8,8 @@ import com.weg.gestao_escolar.repository.ProfessorRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ProfessorService {
@@ -30,6 +32,20 @@ public class ProfessorService {
             Professor professorSalva = professorRepository.criarProfessor(professor);
             ProfessorResponseDto professorResponseDto = professorMapper.toResponse(professorSalva);
             return professorResponseDto;
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public List<ProfessorResponseDto> listaProfessor(){
+        try {
+            List<Professor>professor = professorRepository.professores();
+            List<ProfessorResponseDto>listaDto = new ArrayList<>();
+            for (Professor u : professor){
+                ProfessorResponseDto dto = professorMapper.toResponse(u);
+                listaDto.add(dto);
+            }
+            return listaDto;
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }

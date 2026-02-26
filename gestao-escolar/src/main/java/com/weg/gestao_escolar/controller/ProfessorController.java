@@ -3,10 +3,9 @@ package com.weg.gestao_escolar.controller;
 import com.weg.gestao_escolar.dto.professor.ProfessorRequestDto;
 import com.weg.gestao_escolar.dto.professor.ProfessorResponseDto;
 import com.weg.gestao_escolar.service.ProfessorService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/professor")
@@ -24,4 +23,8 @@ public class ProfessorController {
         return professorService.salvaProfessor(professorRequestDto);
     }
 
+    @GetMapping
+    public List<ProfessorResponseDto> listaProfessores(){
+        return professorService.listaProfessor();
+    }
 }

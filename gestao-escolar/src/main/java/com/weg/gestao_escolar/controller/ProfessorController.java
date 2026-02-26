@@ -27,4 +27,11 @@ public class ProfessorController {
     public List<ProfessorResponseDto> listaProfessores(){
         return professorService.listaProfessor();
     }
+
+    @GetMapping("/{id}")
+    public ProfessorResponseDto buscaId(
+            @PathVariable int id
+    ){
+        return professorService.buscaID(id);
+    }
 }

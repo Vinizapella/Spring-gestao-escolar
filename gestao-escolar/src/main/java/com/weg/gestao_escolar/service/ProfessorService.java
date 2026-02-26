@@ -51,4 +51,14 @@ public class ProfessorService {
         }
     }
 
+    public ProfessorResponseDto buscaID(int id){
+        try {
+            Professor professor1 = professorRepository.buscaId(id);
+            ProfessorResponseDto professorResponseDto = professorMapper.toResponse(professor1);
+            return professorResponseDto;
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }

@@ -63,4 +63,32 @@ public class ProfessorRepository {
         return professores;
     }
 
+    public Professor buscaId(int id)throws SQLException {
+        String sql = """
+                SELECT
+                id,
+                nome,
+                email,
+                disciplina
+                FROM
+                professor
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                int identidade = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String disciplina = rs.getString("disciplina");
+                Professor professor1 = new Professor(identidade, nome, email, disciplina);
+                return professor1;
+            }
+        }
+        return null;
+    }
+
 }

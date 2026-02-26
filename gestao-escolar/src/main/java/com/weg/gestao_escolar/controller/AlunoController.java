@@ -37,4 +37,12 @@ public class AlunoController {
         return alunoService.procuraId(id);
     }
 
+    @PutMapping("/{id}")
+    public AlunoResponseDto atualizaAluno(
+            @PathVariable int id,
+            @RequestBody AlunoRequestDto alunoRequestDto
+    ){
+        return alunoService.atualizacao(alunoRequestDto, id);
+    }
+
 }

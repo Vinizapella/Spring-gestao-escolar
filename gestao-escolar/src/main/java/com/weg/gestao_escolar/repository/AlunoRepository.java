@@ -117,4 +117,27 @@ public class AlunoRepository {
         }
         return null;
     }
+
+    public void atualizaAluno(Aluno aluno)throws SQLException{
+        String sql = """
+                UPDATE
+                aluno
+                SET
+                nome = ?,
+                email = ?,
+                matricula = ?,
+                data_nascimento = ?
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, aluno.getNome());
+            stmt.setString(2, aluno.getEmail());
+            stmt.setString(3, aluno.getMatricula());
+            stmt.setObject(4, aluno.getData_nascimento());
+            stmt.setInt(5, aluno.getId());
+            stmt.executeUpdate();
+        }
+    }
 }

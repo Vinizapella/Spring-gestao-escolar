@@ -74,4 +74,15 @@ public class AlunoService {
         }
     }
 
+    public AlunoResponseDto atualizacao(AlunoRequestDto alunoRequestDto, int id){
+        try {
+            Aluno aluno = alunoMapper.toEntity(alunoRequestDto);
+            aluno.setId(id);
+            alunoRepository.atualizaAluno(aluno);
+            return alunoMapper.toResponse(aluno);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }

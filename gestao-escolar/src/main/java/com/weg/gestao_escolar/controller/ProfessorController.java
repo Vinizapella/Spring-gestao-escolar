@@ -34,4 +34,12 @@ public class ProfessorController {
     ){
         return professorService.buscaID(id);
     }
+
+    @PutMapping("/{id}")
+    public ProfessorResponseDto atualizaProfessor(
+            @RequestBody ProfessorRequestDto professorRequestDto,
+            @PathVariable int id
+    ){
+        return professorService.atualiza(professorRequestDto, id);
+    }
 }

@@ -61,4 +61,15 @@ public class ProfessorService {
         }
     }
 
+    public ProfessorResponseDto atualiza(ProfessorRequestDto professorRequestDto, int id){
+        try {
+            Professor professor = professorMapper.toEntity(professorRequestDto);
+            professor.setId(id);
+            professorRepository.atualiza(professor);
+            return professorMapper.toResponse(professor);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }

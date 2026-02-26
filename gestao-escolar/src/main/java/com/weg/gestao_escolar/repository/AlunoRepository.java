@@ -5,6 +5,9 @@ import com.weg.gestao_escolar.utils.Conexao;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class AlunoRepository {
@@ -34,5 +37,33 @@ public class AlunoRepository {
             }
         }
         return aluno;
+    }
+
+    public List<Aluno>listarAlunos()throws SQLException{
+        String sql = """
+                SELECT
+                id,
+                nome,
+                email,
+                matricula,
+                data_nascimento
+                FROM
+                aluno
+                """;
+        List<Aluno>alunos = new ArrayList<>();
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String matricula = rs.getString("matricula");
+                LocalDate data_nascimento = rs.getObject("data_nascimento", LocalDate.class);
+                Aluno aluno = new Aluno(id, nome, email, matricula, data_nascimento);
+                alunos.add(aluno);
+            }
+        }
+        return alunos;
     }
 }

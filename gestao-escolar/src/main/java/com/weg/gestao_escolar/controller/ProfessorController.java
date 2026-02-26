@@ -42,4 +42,11 @@ public class ProfessorController {
     ){
         return professorService.atualiza(professorRequestDto, id);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteProfessor(
+            @PathVariable int id
+    ){
+        professorService.deletarProfessor(id);
+    }
 }

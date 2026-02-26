@@ -28,6 +28,18 @@ public class ProfessorService {
     public ProfessorResponseDto salvaProfessor(ProfessorRequestDto professorRequestDto){
 
         try {
+            if (professorRepository.verificacaoEmail(professorRequestDto.email())){
+                throw new RuntimeException("Email já cadastrado" + professorRequestDto.email());
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+
+        if (professorRequestDto.nome() == null || professorRequestDto.nome().trim().isEmpty()){
+            throw new RuntimeException("Nome não pode ser vazio");
+        }
+
+        try {
             Professor professor = professorMapper.toEntity(professorRequestDto);
             Professor professorSalva = professorRepository.criarProfessor(professor);
             ProfessorResponseDto professorResponseDto = professorMapper.toResponse(professorSalva);
@@ -67,6 +79,14 @@ public class ProfessorService {
             professor.setId(id);
             professorRepository.atualiza(professor);
             return professorMapper.toResponse(professor);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public void deletarProfessor(int id){
+        try {
+            professorRepository.delete(id);
         }catch (SQLException e){
             throw new RuntimeException(e.getMessage());
         }

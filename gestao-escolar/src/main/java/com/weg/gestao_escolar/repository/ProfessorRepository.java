@@ -112,4 +112,40 @@ public class ProfessorRepository {
         }
     }
 
+    public void delete(int id)throws SQLException{
+        String sql = """
+                DELETE
+                FROM
+                professor
+                WHERE 
+                id =?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+    }
+
+    public boolean verificacaoEmail(String email)throws SQLException {
+        String sql = """
+                SELECT
+                COUNT(*)
+                FROM
+                aluno
+                WHERE
+                email = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, email);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()){
+                    return rs.getInt(1)>0;
+                }
+            }
+        }
+        return false;
+    }
+
 }

@@ -85,4 +85,12 @@ public class AlunoService {
         }
     }
 
+    public void deletarAluno(int id){
+        try {
+            alunoRepository.deletaAluno(id);
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }

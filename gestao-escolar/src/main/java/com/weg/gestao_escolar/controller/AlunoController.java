@@ -45,4 +45,10 @@ public class AlunoController {
         return alunoService.atualizacao(alunoRequestDto, id);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteAluno(
+            @PathVariable int id
+    ){
+        alunoService.deletarAluno(id);
+    }
 }

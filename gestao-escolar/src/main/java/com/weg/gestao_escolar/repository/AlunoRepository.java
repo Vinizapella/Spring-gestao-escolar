@@ -140,4 +140,19 @@ public class AlunoRepository {
             stmt.executeUpdate();
         }
     }
+
+    public void deletaAluno(int id)throws SQLException {
+        String sql = """
+                DELETE
+                FROM
+                aluno
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+    }
 }

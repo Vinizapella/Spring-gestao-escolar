@@ -50,4 +50,14 @@ public class AlunoService {
         }
     }
 
+    public AlunoResponseDto procuraId(int id){
+        try {
+            Aluno aluno = alunoRepository.listarPorId(id);
+            AlunoResponseDto alunoResponseDto = alunoMapper.toResponse(aluno);
+            return alunoResponseDto;
+        }catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
 }

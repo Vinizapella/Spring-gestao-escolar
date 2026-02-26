@@ -66,4 +66,34 @@ public class AlunoRepository {
         }
         return alunos;
     }
+
+    public Aluno listarPorId(int id)throws SQLException{
+        String sql = """
+                SELECT
+                id,
+                nome,
+                email,
+                matricula,
+                data_nascimento
+                FROM
+                aluno
+                WHERE
+                id = ?
+                """;
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()){
+                int identidade = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String matricula = rs.getString("matricula");
+                LocalDate data_nascimento = rs.getObject("data_nascimento", LocalDate.class);
+                Aluno aluno = new Aluno(id, nome, email, matricula, data_nascimento);
+                return aluno;
+            }
+        }
+        return null;
+    }
 }

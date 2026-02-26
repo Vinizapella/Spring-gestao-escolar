@@ -30,4 +30,11 @@ public class AlunoController {
             return alunoService.listarAlunos();
     }
 
+    @GetMapping("/{id}")
+    public AlunoResponseDto procuraId(
+            @PathVariable int id
+    ){
+        return alunoService.procuraId(id);
+    }
+
 }

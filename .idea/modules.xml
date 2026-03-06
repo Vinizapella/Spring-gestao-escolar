@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/gestao-escolar.iml" filepath="$PROJECT_DIR$/.idea/gestao-escolar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Spring-gestao-escolar.iml" filepath="$PROJECT_DIR$/.idea/Spring-gestao-escolar.iml" />
     </modules>
   </component>
 </project>

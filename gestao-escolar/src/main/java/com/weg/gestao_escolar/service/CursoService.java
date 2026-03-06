@@ -24,7 +24,7 @@ public class CursoService {
 
     public CursoResponseDto salvarCurso(CursoRequestDto cursoRequestDto) {
         if (cursoRequestDto.nome() == null || cursoRequestDto.nome().trim().isEmpty()) {
-            throw new RuntimeException("Erro: O nome do curso não pode ser vazio.");
+            throw new RuntimeException("O nome do curso não pode ser vazio");
         }
 
         try {

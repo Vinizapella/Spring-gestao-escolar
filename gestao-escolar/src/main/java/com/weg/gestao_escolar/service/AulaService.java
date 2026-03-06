@@ -37,7 +37,7 @@ public class AulaService {
             Aula aulaSalva = aulaRepository.criarAula(aula);
             return aulaMapper.toResponse(aulaSalva, turma.getNome());
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao salvar aula: " + e.getMessage());
+            throw new RuntimeException("Erro ao salvar aula " + e.getMessage());
         }
     }
 

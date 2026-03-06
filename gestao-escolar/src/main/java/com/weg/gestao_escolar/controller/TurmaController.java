@@ -3,6 +3,7 @@ package com.weg.gestao_escolar.controller;
 import com.weg.gestao_escolar.dto.turma.TurmaRequestDto;
 import com.weg.gestao_escolar.dto.turma.TurmaResponseDto;
 import com.weg.gestao_escolar.service.TurmaService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,9 @@ public class TurmaController {
     }
 
     @PostMapping
-    public TurmaResponseDto criar(@RequestBody TurmaRequestDto dto) {
+    public TurmaResponseDto criar(
+            @Valid @RequestBody TurmaRequestDto dto
+    ) {
         return turmaService.salvar(dto);
     }
 
@@ -28,12 +31,16 @@ public class TurmaController {
     }
 
     @GetMapping("/{id}")
-    public TurmaResponseDto buscar(@PathVariable int id) {
+    public TurmaResponseDto buscar(
+            @PathVariable int id
+    ) {
         return turmaService.buscarPorId(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable int id) {
+    public void deletar(
+            @PathVariable int id
+    ) {
         turmaService.deletar(id);
     }
 }

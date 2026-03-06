@@ -3,6 +3,7 @@ package com.weg.gestao_escolar.controller;
 import com.weg.gestao_escolar.dto.aluno.AlunoRequestDto;
 import com.weg.gestao_escolar.dto.aluno.AlunoResponseDto;
 import com.weg.gestao_escolar.service.AlunoService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -20,7 +21,7 @@ public class AlunoController {
 
     @PostMapping
     public AlunoResponseDto criarAluno(
-            @RequestBody AlunoRequestDto alunoRequestDto
+            @Valid @RequestBody AlunoRequestDto alunoRequestDto
     ){
             return alunoService.salvarAluno(alunoRequestDto);
     }
@@ -40,7 +41,7 @@ public class AlunoController {
     @PutMapping("/{id}")
     public AlunoResponseDto atualizaAluno(
             @PathVariable int id,
-            @RequestBody AlunoRequestDto alunoRequestDto
+            @Valid @RequestBody AlunoRequestDto alunoRequestDto
     ){
         return alunoService.atualizacao(alunoRequestDto, id);
     }

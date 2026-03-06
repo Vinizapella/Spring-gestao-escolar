@@ -3,6 +3,7 @@ package com.weg.gestao_escolar.controller;
 import com.weg.gestao_escolar.dto.nota.NotaRequestDto;
 import com.weg.gestao_escolar.dto.nota.NotaResponseDto;
 import com.weg.gestao_escolar.service.NotaService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,9 @@ public class NotaController {
     }
 
     @PostMapping
-    public NotaResponseDto criar(@RequestBody NotaRequestDto dto) {
+    public NotaResponseDto criar(
+            @Valid @RequestBody NotaRequestDto dto
+    ) {
         return notaService.salvarNota(dto);
     }
 
@@ -28,12 +31,16 @@ public class NotaController {
     }
 
     @GetMapping("/{id}")
-    public NotaResponseDto buscar(@PathVariable int id) {
+    public NotaResponseDto buscar(
+            @PathVariable int id
+    ) {
         return notaService.buscarPorId(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable int id) {
+    public void deletar(
+            @PathVariable int id
+    ) {
         notaService.deletarNota(id);
     }
 }

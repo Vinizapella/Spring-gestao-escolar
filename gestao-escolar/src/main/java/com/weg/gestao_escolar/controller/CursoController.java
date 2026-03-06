@@ -3,6 +3,7 @@ package com.weg.gestao_escolar.controller;
 import com.weg.gestao_escolar.dto.curso.CursoRequestDto;
 import com.weg.gestao_escolar.dto.curso.CursoResponseDto;
 import com.weg.gestao_escolar.service.CursoService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,9 @@ public class CursoController {
     }
 
     @PostMapping
-    public CursoResponseDto criarCurso(@RequestBody CursoRequestDto cursoRequestDto) {
+    public CursoResponseDto criarCurso(
+            @Valid @RequestBody CursoRequestDto cursoRequestDto
+    ) {
         return cursoService.salvarCurso(cursoRequestDto);
     }
 
@@ -28,20 +31,24 @@ public class CursoController {
     }
 
     @GetMapping("/{id}")
-    public CursoResponseDto buscarPorId(@PathVariable int id) {
+    public CursoResponseDto buscarPorId(
+            @PathVariable int id
+    ) {
         return cursoService.buscarPorId(id);
     }
 
     @PutMapping("/{id}")
     public CursoResponseDto atualizarCurso(
             @PathVariable int id,
-            @RequestBody CursoRequestDto cursoRequestDto
+            @Valid @RequestBody CursoRequestDto cursoRequestDto
     ) {
         return cursoService.atualizar(cursoRequestDto, id);
     }
 
     @DeleteMapping("/{id}")
-    public void deletarCurso(@PathVariable int id) {
+    public void deletarCurso(
+            @PathVariable int id
+    ) {
         cursoService.deletar(id);
     }
 }

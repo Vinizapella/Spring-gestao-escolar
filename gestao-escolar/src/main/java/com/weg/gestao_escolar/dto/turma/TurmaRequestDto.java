@@ -15,7 +15,7 @@ public record TurmaRequestDto(
         int cursoId,
         @NotNull(message = "nao pode ser nula")
         int professorId,
-        @NotEmpty(message = "A lista de alunos não pode estar vazia"
+        @NotEmpty(message = "A lista de alunos não pode estar vazia")
         List<Integer> alunoIds
 ) {
 }
